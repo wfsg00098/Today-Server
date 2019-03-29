@@ -27,24 +27,24 @@ try{
     $temp = $para["canteen"];
 	$canteen = $temp;
     assert(isset($temp));
-    $temp1 = $para["count"];
-	$count = $temp1;
-    assert(isset($temp1));
-	$dishes = "";
-    for ($i = 1;$i<=intval($temp1);$i++){
-        $temp = $para["id".$i];
-		$dishes = $dishes.$temp."|";
-        assert(isset($temp));
-        $temp = $para["count".$i];
-		$dishes = $dishes.$temp."|";
-        assert(isset($temp));
-    }
+    $query = "select * from dishes where canteen='".$canteen."'";
+	$result = mysqli_query($sql,$query);
+	mysqli_data_seek($result,0);
+	$data["count"] = null;
+	$count = 0;
+	while ($row = mysqli_fetch_row($result)){
+		$count++;
+		$data["id".$count] = $row[0];
+		$data["name".$count] = $row[2];
+		$data["price".$count] = $row[3];
+		$data["image".$count] = $row[4];
+		$data["type".$count] = $row[5];
+		$data["calorie".$count] = $row[6];
+		$data["liked".$count] = $row[7];
+	}
+	$data["count"] = $count;
     $data["status"] = "success";
-	$date = date("YmdHis").msectime();
-	$order_id = $date.mt_rand(0,99);
-	$data["order_id"] = $order_id;
     echo json_encode($data);
-	mysqli_query($sql,"insert into orders values('".$order_id."','".$username."',".$canteen.",'".$date."',".$count.",'".$dishes."','');");
 	}
 catch (Throwable $e){
     echo json_encode($data);

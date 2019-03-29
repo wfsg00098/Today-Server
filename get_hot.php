@@ -9,6 +9,6 @@ header('Content-Type:text/json');
 $data=[];
 $data["count"] = 8;
 for ($i = 0 ; $i <8; $i++){
-    $data["data".$i] = mt_rand(50,200);
+    $data["data".$i] = mt_rand(5,200);
 }
 echo json_encode($data);
