@@ -29,13 +29,13 @@ try{
         $temp["id"] = $row[0];
         $temp["username"] = $row[1];
         $temp["date"] = $row[3];
-        $temp["comment"] = $row[4];
+        $temp["message"] = $row[4];
         $temp["liked"] = $row[6];
         array_push($data["comments"],$temp);
     }
     $data["status"] = "success";
-    echo json_encode($data);
+    echo json_encode($data, JSON_UNESCAPED_UNICODE + JSON_UNESCAPED_SLASHES);
 }
 catch (Throwable $e){
-    echo json_encode($data);
+    echo json_encode($data, JSON_UNESCAPED_UNICODE + JSON_UNESCAPED_SLASHES);
 }

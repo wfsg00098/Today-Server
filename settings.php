@@ -29,7 +29,7 @@ function msectime() {
     return $msectime;
 }
 
-    $sqladdr = "localhost";
+$sqladdr = "";
     $sqluser = "";
     $sqlpass = "";
     $sqldbnm = "";
